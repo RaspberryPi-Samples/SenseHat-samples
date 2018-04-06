@@ -1,9 +1,8 @@
 #!/usr/bin/env python
  
-import mosquitto
+import paho.mqtt.client as mqtt
 from mqtt_settings import config
 import time
-#import numpy as np
 import json
 from sense_hat import SenseHat
 from collections import OrderedDict
@@ -39,7 +38,7 @@ def on_publish(mosq, obj, mid):
     print("publish %s %s %s" % (mosq, obj, mid))
 
 def main():
-    cli = mosquitto.Mosquitto()
+    cli = mqtt.Client()
     cli.on_message = on_message
     cli.on_publish = on_publish
 
@@ -55,7 +54,6 @@ def main():
     d_sensors = all_sensors(sense)
 
     while cli.loop() == 0:
-        #now = now_timestamp()
         now = datetime.datetime.now(pytz.utc)
         
         sensors = d_sensors.keys() # all sensors

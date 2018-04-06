@@ -1,9 +1,10 @@
 #!/usr/bin/env python
  
-import matplotlib.pyplot as plt
-import mosquitto
-import json
+
+import paho.mqtt.client as mqtt
 from mqtt_settings import config
+import matplotlib.pyplot as plt
+import json
 from numpy_buffer import RingBuffer
 import datetime
 from timestamp import int2dt
@@ -42,7 +43,7 @@ def on_publish(mosq, obj, mid):
     pass
 
 def main():
-    cli = mosquitto.Mosquitto()
+    cli = mqtt.Client()
     cli.on_message = on_message
     cli.on_publish = on_publish
 
