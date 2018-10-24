@@ -1,0 +1,16 @@
+sudo : false
+
+language: python
+
+python:
+  - 2.7
+  - 3.5
+  - 3.6
+
+install:
+  - pip install -qq flake8
+
+script:
+  - flake8 --version
+  - flake8 --ignore=E501 MQTT_samples colorchooser_pyqt mason_level
+  # - pytest -s -v
