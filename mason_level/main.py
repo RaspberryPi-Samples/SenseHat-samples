@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
 import time
 from sense_hat import SenseHat
+
 
 def limit(lcd_pos):
     pos_lim = 6
@@ -13,6 +13,7 @@ def limit(lcd_pos):
         return pos_lim
     return lcd_pos
 
+
 def main():
     sense = SenseHat()
     color = (255, 0, 0)
@@ -20,8 +21,8 @@ def main():
     prev_y = -1
     while True:
         acc = sense.get_accelerometer_raw()
-        x = round(limit(-10 * acc['x'] + 3))
-        y = round(limit(-10 * acc['y'] + 3))
+        x = round(limit(-10 * acc["x"] + 3))
+        y = round(limit(-10 * acc["y"] + 3))
         if x != prev_x or y != prev_y:
             sense.clear()
         sense.set_pixel(x, y, *color)
@@ -29,5 +30,6 @@ def main():
         prev_y = y
         time.sleep(0.08)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
